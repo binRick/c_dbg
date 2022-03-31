@@ -1,0 +1,17 @@
+{
+    "name": "c_dbg",
+    "version": "0.0.1",
+    "repo": "binRick/c_dbg",
+    "description": "C Debugger",
+    "keywords": [
+        "c",
+        "dbg",
+        "module"
+    ],
+    "license": "MIT",
+    "makefile": "Makefile",
+    "install": "make install",
+    "dependencies": {
+        "clibs/module": "0.1.1"
+    }
+}

@@ -18,32 +18,33 @@
 #pragma message("WARNING: the \"dbg.h\" header is included in your code base")
 #endif
 
-#include <stdio.h>
 #include <assert.h>
+#include <stdio.h>
 
 #ifdef DBG_H_DEF_ONCE
 #include <string.h>
+
 
 /**
  * basename(3) have inconsistent implementation across UNIX-like systems.
  * Besides, Windows doesn't have such API.
  */
-const char *bname_b49cf5f693ad(const char *path)
-{
-    const char *p;
+const char *bname_b49cf5f693ad(const char *path){
+  const char *p;
+
 #ifdef _WIN32
-    p = strrchr(path, '\\');
+  p = strrchr(path, '\\');
 #else
-    p = strrchr(path, '/');
+  p = strrchr(path, '/');
 #endif
-    return p != NULL ? p + 1 : path;
+  return(p != NULL ? p + 1 : path);
 }
 #endif      /* DBG_DEF_ONCE */
 
 /**
  * Taken from https://github.com/sharkdp/dbg-macro
  */
-#if defined(__unix__) || (defined(__APPLE__) && defined(__MACH__))
+#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #define DBG_H_IS_UNIX
 #endif
 
@@ -56,10 +57,10 @@ const char *bname_b49cf5f693ad(const char *path)
 
 #ifdef DBG_H_IS_UNIX
 #include <unistd.h>
-#define DBG_H_COL(out, col)          (isatty(fileno(out)) ? (col) : COL_NONE)
+#define DBG_H_COL(out, col)    (isatty(fileno(out)) ? (col) : COL_NONE)
 #else
 /* XXX: Assume it's colorized output */
-#define DBG_H_COL(out, col)          (col)
+#define DBG_H_COL(out, col)    (col)
 #endif
 
 /*
@@ -67,36 +68,36 @@ const char *bname_b49cf5f693ad(const char *path)
  * see: linux/include/linux/stringify.h
  */
 #ifndef xstr
-#define xstr0(x)                    #x
-#define xstr(x)                     xstr0(x)
+#define xstr0(x)    #x
+#define xstr(x)     xstr0(x)
 #endif
 
 #ifdef _WIN32
-#define DBG_H_FILE       __FILE__
+#define DBG_H_FILE    __FILE__
 #else
-#define DBG_H_FILE       __BASE_FILE__
+#define DBG_H_FILE    __BASE_FILE__
 #endif
 
 #ifndef DBG_H_DISABLE
-#define x_dbg_ac3a285c(out, x, fs)      ({                                          \
-    typeof(x) _x0 = (x);                                                            \
-    int _n0 = fprintf(                                                              \
-                out, "%s[%s:%d (%s)]%s %s%s%s = %s" xstr(fs) "%s (%s%s%s)\n",       \
-                DBG_H_COL(out, COL_DBG),                                            \
-                bname_b49cf5f693ad(DBG_H_FILE), __LINE__, __func__,                 \
-                DBG_H_COL(out, COL_RST),                                            \
-                DBG_H_COL(out, COL_EXPR), #x, DBG_H_COL(out, COL_RST),              \
-                DBG_H_COL(out, COL_VAL), _x0, DBG_H_COL(out, COL_RST),              \
-                DBG_H_COL(out, COL_TYPE), #fs, DBG_H_COL(out, COL_RST)              \
-            );                                                                      \
-    assert(_n0 > 0);                                                                \
-    _x0;                                                                            \
-})
+#define x_dbg_ac3a285c(out, x, fs)    ({                            \
+    typeof(x) _x0 = (x);                                            \
+    int _n0 = fprintf(                                              \
+      out, "%s[%s:%d (%s)]%s %s%s%s = %s" xstr(fs) "%s (%s%s%s)\n", \
+      DBG_H_COL(out, COL_DBG),                                      \
+      bname_b49cf5f693ad(DBG_H_FILE), __LINE__, __func__,           \
+      DBG_H_COL(out, COL_RST),                                      \
+      DBG_H_COL(out, COL_EXPR), #x, DBG_H_COL(out, COL_RST),        \
+      DBG_H_COL(out, COL_VAL), _x0, DBG_H_COL(out, COL_RST),        \
+      DBG_H_COL(out, COL_TYPE), #fs, DBG_H_COL(out, COL_RST)        \
+      );                                                            \
+    assert(_n0 > 0);                                                \
+    _x0;                                                            \
+  })
 #else
-#define x_dbg_ac3a285c(out, x, fs)      ((void) (out), (void) (#fs), (x))
+#define x_dbg_ac3a285c(out, x, fs)    ((void)(out), (void)(#fs), (x))
 #endif
 
-#define dbg(x, fs)      x_dbg_ac3a285c(stdout, x, fs)
-#define dbge(x, fs)     x_dbg_ac3a285c(stderr, x, fs)
+#define dbg(x, fs)                    x_dbg_ac3a285c(stdout, x, fs)
+#define dbge(x, fs)                   x_dbg_ac3a285c(stderr, x, fs)
 
 #endif
