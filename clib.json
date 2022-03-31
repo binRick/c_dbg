@@ -10,11 +10,11 @@
     ],
     "license": "MIT",
     "files": [
-        "src/dbg.c",
         "include/dbg.h",
-        "README.md",
+        "src/dbg_module_deps.c",
+        "src/dbg.c",
         "tests/test_dbg1.c",
-        "src/dbg_module_deps.c"
+        "README.md"
     ],
     "makefile": "Makefile",
     "install": "make install",
