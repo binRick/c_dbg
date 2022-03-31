@@ -1,15 +1,20 @@
 /********************************/
 #include <stdio.h>
 /********************************/
-/********************************/
 //#define DBG_H_DISABLE
 /********************************/
 #include "dbg.h"
+#include "include/debug_print.h"
 /********************************/
 #include "src/dbg.c"
 /********************************/
+#define RED_GROUP           1
+#define EXTRA_INFO_GROUP    2
+/********************************/
+debug_print_options o = (struct debug_print_options){ .colorscheme = FORE_BLUE };
 
 
+/********************************/
 static int factorial(int n) {
   if (dbg(n <= 1, % d)) {
     return(dbg(1, % d));
@@ -18,6 +23,33 @@ static int factorial(int n) {
 }
 
 
+/********************************/
+void debug_print_demo(){
+  int  i  = 5;
+  char *s = "yo";
+  FILE *a = fopen("/tmp/a", "w");
+
+  strncpy(debug_print_group_options_list[RED_GROUP].colorscheme, FORE_MAGENTA, DEBUG_PRINT_INTERNAL_STRING_BUFFER_SIZE - 1);
+  debug_print_group_options_list[EXTRA_INFO_GROUP].disabled = true;
+
+  DBG(factorial(10));
+  DBG(7, .group = 1);
+  DBG(i);
+  DBG('A');
+  DBG(s);
+  DBG("yo", FORE_GREEN);
+  DBG("yo message", FORE_YELLOW);
+  DBG(0 + 22);
+  DBG(0 == 1);
+  DBG(1 == 1);
+  DBG(2 > 1);
+  DBG(s, .group                                         = EXTRA_INFO_GROUP);
+  DBG(o, .colorscheme                                   = FORE_GREEN, .group = RED_GROUP);
+  DBG(debug_print_group_options_list[RED_GROUP], .group = RED_GROUP);
+}
+
+
+/********************************/
 int main(void) {
   int x = 1;
 
@@ -35,6 +67,10 @@ int main(void) {
   dbg(env_get_or("USER1", "UNKNOWN"), % s);
   dbge(env_get_or("USER1", "UNKNOWN"), % s);
 
+  debug_print_demo();
+  DBG(env_get_or("USER", "UNKNOWN"), FORE_GREEN);
+  DBG(env_get_or("USER1", "UNKNOWN"), FORE_YELLOW);
 
   return(0);
 }
+/********************************/
