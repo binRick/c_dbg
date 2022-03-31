@@ -1,6 +1,6 @@
 {
     "name": "c_dbg",
-    "version": "12c3a98566343ea485720d680967ff70c894d2f2",
+    "version": "56cb688089221e5b436f3aa09fbb3189ac24683c",
     "repo": "binRick/c_dbg",
     "description": "C Debugger",
     "keywords": [
@@ -19,7 +19,6 @@
     "makefile": "Makefile",
     "install": "make install",
     "dependencies": {
-        "clibs/module": "0.1.1",
-        "4thel00z/env.h": "0.1.0"
+        "clibs/module": "0.1.1"
     }
 }
