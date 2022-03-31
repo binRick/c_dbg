@@ -48,3 +48,6 @@ git-pull:
 push: tidy
 	@git commit -am 'automated git commit'
 	@git push
+
+logged-test:
+	@make test --quiet --no-print-directory
