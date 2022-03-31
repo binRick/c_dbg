@@ -1,8 +1,14 @@
+/********************************/
 #include <stdio.h>
-
+/********************************/
 #define DBG_H_DEF_ONCE
+/********************************/
 //#define DBG_H_DISABLE
+/********************************/
 #include "dbg.h"
+/********************************/
+#include "src/dbg.c"
+/********************************/
 
 
 static int factorial(int n) {
@@ -25,5 +31,11 @@ int main(void) {
   dbg(&main, % p);
   dbg(main == &main, % d);
   dbg("this line is executed", % s);
+
+  dbg(env_get_or("USER", "UNKNOWN"), % s);
+  dbg(env_get_or("USER1", "UNKNOWN"), % s);
+  dbge(env_get_or("USER1", "UNKNOWN"), % s);
+
+
   return(0);
 }
