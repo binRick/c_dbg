@@ -9,6 +9,7 @@
         "module"
     ],
     "license": "MIT",
+    "files": ["README.md", "src/dbg.c", "src/dbg.h", "tests/test_dbg1.c"],
     "makefile": "Makefile",
     "install": "make install",
     "dependencies": {
