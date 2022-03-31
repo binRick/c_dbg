@@ -1,2 +1,2 @@
 
-#include "src/dbg_module_deps.c"
+#include "dbg_module_deps.c"
