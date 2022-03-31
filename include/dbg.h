@@ -1,3 +1,4 @@
+#define DBG_H_DEF_ONCE
 #ifndef DBG_H_c49aa87c_54eb_46d2_8d72_a51f5efce1ac
 #define DBG_H_c49aa87c_54eb_46d2_8d72_a51f5efce1ac
 
