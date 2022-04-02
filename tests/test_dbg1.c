@@ -71,6 +71,36 @@ int main(void) {
   DBG(env_get_or("USER", "UNKNOWN"), FORE_GREEN);
   DBG(env_get_or("USER1", "UNKNOWN"), FORE_YELLOW);
 
+  char *ss = "xxxxxxxxxxxxxxxxx";
+  int dd = 1024;
+  print("s:", ss, dd);
+  print(env_get_or("USER1", "UNKNOWN"));
+  print("d:", dd);
+
   return(0);
 }
 /********************************/
+/*
+enum
+{
+    plain = 0,
+    bold = 1,
+    italic = 2
+};
+
+
+void PrintString(const char* message = NULL, int size = 0, int style = 0)
+{
+}
+
+void vvvx(){
+
+#define PRINT_STRING(...) PrintString(__VA_ARGS__)
+
+
+    PRINT_STRING("Hello, World!");
+    PRINT_STRING("Hello, World!", 18);
+    PRINT_STRING("Hello, World!", 18, bold);
+
+    return 0;
+}*/

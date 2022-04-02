@@ -11,6 +11,7 @@
     "license": "MIT",
     "files": [
         "include/dbg.h",
+        "include/debug_print.h",
         "src/dbg_module_deps.c",
         "src/dbg.c",
         "tests/test_dbg1.c",
